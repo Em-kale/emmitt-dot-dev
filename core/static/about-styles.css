@@ -1,6 +1,6 @@
 .about-me-container {
-    width: 80vw;
-    height: 70vh;
+    width: 90vw;
+    height: 75vh;
     margin: auto;
     margin-top: 6vh;
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
@@ -8,6 +8,7 @@
     opacity: 1;
     transition: opacity 1s ease-out;
     overflow-y: auto;
+    scrollbar-width: thin;
 }
 
 .about-me-title {
@@ -21,13 +22,25 @@
 }
 
 .about-me-content {
-    font-family: 'Google Sans Code', 'Courier New', monospace;
-    font-optical-sizing: auto;
     padding: 20px;
-    font-weight: 420;
-    font-size: 14px;
+    font-size: 1.3vw;
     font-style: normal;
     margin: 0;
+    font-family: "Google Sans Code", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.headshot {
+    height: 30%;
+    width: 25%;
+    margin-right: 20px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    float: left;
+    filter: grayscale() brightness(1.2);
+    border-radius: 50%;
 }
 
 .crumb:hover {

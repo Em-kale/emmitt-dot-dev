@@ -4,6 +4,8 @@
     font-weight: 500;
     font-style: normal;
     margin: 0;
+    margin-left: 2vw;
+    margin-top: 2vw;
 }
 
 .sub-title {
@@ -13,6 +15,7 @@
     margin-top: 5px;
     font-size: 14px;
     font-weight: 500;
+    margin-left: 2vw;
     font-style: normal;
 }
 
@@ -31,14 +34,12 @@
 
 .list-container {
     margin-top: 20vh;
-    width: 50vw;
-    margin-left: 42vw;
+    margin-left: 2vw;
     text-align: left;
 }
 
 .sub-list-1 {
     margin-left: 5%;
-    width: 50%;
     text-align: left;
 }
 
