@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <title>L.dev</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" >
+    <link rel="stylesheet" type="text/css" href="/static/about-styles.css" >
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1 class="main-title">Emmitt K. Luhning</h1>
+    <h2 class="sub-title">Professional and Unprofessional Computer Programmer</h2>
+    <div id="home-container">
+        <div class="list-container">
+            <details>
+                <summary>
+                    <p class="list-item">
+                            Project Links
+                    </p>
+                </summary>
+                <div class="sub-list-1">
+                    <p class="list-item">Graph Traversal Visualizer</p>
+                    <p class="list-item">
+                        <a class="link" href="https://github.com/Em-kale/carleton-mail-delivery-robot" target="_blank">
+                            Autonomous Mail Delivery
+                        </a>
+                    </p>
+                    <p class="list-item">
+                        <a class="link" href="https://github.com/Em-kale/proof" target="_blank">
+                            Proof
+                        </a>
+                    </p>
+                    <p class="list-item">
+                        <a class="link" href="https://github.com/Em-kale/graph-validator-generator" target="_blank">
+                            Near Staking Web Crawler 
+                        </a>
+                    </p>
+                    <p class="list-item">This site</p>
+                </div>
+            </details>
+            <details>
+                <summary>
+                    <p class="list-item">
+                        Socials 
+                    </p>
+                </summary>
+                <div class="sub-list-1">
+                    <p class="list-item">
+                        <a class="link" href="https://github.com/Em-kale" target="_blank">
+                            Github
+                        </a>
+                    </p>
+                    <p class="list-item">
+                        <a class="link" href="https://www.linkedin.com/in/emmittl" target="_blank">
+                            Linkedin
+                        </a>
+                    </p>
+                </div>
+            </details>
+            <p class="list-item" hx-target="#home-container" hx-post="/about-me" hx-swap="innerHTML settle:1s">
+                    About Me 
+            </p>
+         <!--       <p class="list-item">
+                   Blog 
+    </p> -->
+            </div> 
+        </div>
+</body>
+
+</html>

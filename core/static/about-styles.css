@@ -1,0 +1,36 @@
+.about-me-container {
+    width: 80vw;
+    height: 70vh;
+    margin: auto;
+    margin-top: 6vh;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    opacity: 1;
+    transition: opacity 1s ease-out;
+    overflow-y: auto;
+}
+
+.about-me-title {
+    font-family: 'Google Sans Code', 'Courier New', monospace;
+    font-optical-sizing: auto;
+    padding: 20px;
+    font-weight: 420;
+    font-size: 22;
+    font-style: normal;
+    margin: 0;
+}
+
+.about-me-content {
+    font-family: 'Google Sans Code', 'Courier New', monospace;
+    font-optical-sizing: auto;
+    padding: 20px;
+    font-weight: 420;
+    font-size: 14px;
+    font-style: normal;
+    margin: 0;
+}
+
+.crumb:hover {
+    color: slategray;
+    cursor: pointer;
+}
