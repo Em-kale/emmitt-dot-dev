@@ -1,28 +1,84 @@
+body {
+    background-color: #1a1b26;
+}
+
 .main-title {
     font-family: 'Google Sans Code', 'Courier New', monospace;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
+    font-size: 1.5vw;
     margin: 0;
     margin-left: 2vw;
     margin-top: 2vw;
 }
 
+.magenta {
+    color: #bb9af7;
+}
+
+.light-blue {
+    color: #8db0ff;
+}
+
+.comment {
+    color: #565f89;
+}
+
+.bracket {
+    color: #a9b1d6;
+}
+
+.self {
+    color: #f7768e;
+}
+
+.function-definition {
+    color: #9d7cd8;
+}
+
+.function-name {
+    color: #7aa2f7;
+}
+
+.class-attribute {
+    color: #73daca;
+}
+
+.string {
+    color: #9ece6a;
+}
+
+.return {
+    color: #bb9af7;
+    font-style: italic;
+}
+
+.operator {
+    color: #7dcfff;
+}
+
 .sub-title {
     font-family: 'Google Sans Code', 'Courier New', monospace;
     font-optical-sizing: auto;
+    font-size: 2vw;
     margin: 2px;
     margin-top: 5px;
-    font-size: 14px;
     font-weight: 500;
-    margin-left: 2vw;
+    margin-left: 1.5vw;
     font-style: normal;
+}
+
+.function-div {
+    margin-top: 2%;
+    margin-left: 5%;
 }
 
 .list-item {
     font-family: 'Google Sans Code', 'Courier New', monospace;
     margin: 5px;
     font-optical-sizing: auto;
+    font-size: 1.5vw;
     font-weight: 500;
     font-style: normal;
 }
@@ -33,8 +89,7 @@
 }
 
 .list-container {
-    margin-top: 20vh;
-    margin-left: 2vw;
+    margin-top: 10vh;
     text-align: left;
 }
 
@@ -49,9 +104,6 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    color: slategrey;
-}
 
 a:visited {
     color: slategrey;

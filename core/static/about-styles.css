@@ -8,6 +8,8 @@
     opacity: 1;
     transition: opacity 1s ease-out;
     overflow-y: auto;
+    border-style: solid;
+    border-color: #27a1b9;
     scrollbar-width: thin;
 }
 
@@ -22,10 +24,11 @@
 }
 
 .about-me-content {
-    padding: 20px;
+    padding: 18px;
     font-size: 1.3vw;
     font-style: normal;
     margin: 0;
+    color: #9ece6a;
     font-family: "Google Sans Code", monospace;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -39,7 +42,6 @@
     margin-left: 5px;
     margin-bottom: 5px;
     float: left;
-    filter: grayscale() brightness(1.2);
     border-radius: 50%;
 }
 

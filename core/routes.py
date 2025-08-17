@@ -36,57 +36,71 @@ def aboutMeContent():
 def mainList():
     response = """
         <div class="list-container">
+            <div class="function-div">
             <details>
                 <summary>
+                    <p class="list-item"><span class="comment"># links to my personal projects</span></p>
                     <p class="list-item">
-                            get_project_links()
+                            <span class="function-definition">def</span>
+                            <span class="function-name">get_project_links</span><span class="bracket">():</span> 
                     </p>
                 </summary>
                 <div class="sub-list-1">
-                    <p class="list-item">return "Graph Traversal Visualizer"</p>
+                        <!--<p class="list-item">return "Graph Traversal Visualizer"</p> -->
                     <p class="list-item">
                         <a class="link" href="https://github.com/Em-kale/carleton-mail-delivery-robot" target="_blank">
-                            return "Autonomous Mail Delivery"
+                                <span class="return">return</span><span class="string"> "Autonomous Mail Delivery"</span>
                         </a>
                     </p>
                     <p class="list-item">
                         <a class="link" href="https://github.com/Em-kale/proof" target="_blank">
-                            return "Proof"
+                            <span class="return">return</span> <span class="string">"Proof"</span>
                         </a>
                     </p>
                     <p class="list-item">
                         <a class="link" href="https://github.com/Em-kale/graph-validator-generator" target="_blank">
-                            return "Near Staking Web Crawler"
+                            <span class="return">return</span><span class="string"> 
+                                "Near Staking Web Crawler"
+                            </span>
                         </a>
                     </p>
-                    <p class="list-item">return "This Site"</p>
+                    <p class="list-item"><span class="return">return</span> <span class="string">"This Site"</span></p>
                 </div>
             </details>
+            </div>
+            <div class="function-div">
             <details>
                 <summary>
+                    <p class="list-item"><span class="comment"># check out my 'social media'</span></p>
                     <p class="list-item">
-                        get_socials()
+                        <span class="function-definition">def</span>
+                        <span class="function-name">get_socials</span><span class="bracket">():</span>
                     </p>
                 </summary>
                 <div class="sub-list-1">
                     <p class="list-item">
                         <a class="link" href="https://github.com/Em-kale" target="_blank">
-                            return "Github"
+                            <span class="return">return</span><span class="string"> "Github"</span>
                         </a>
                     </p>
                     <p class="list-item">
                         <a class="link" href="https://www.linkedin.com/in/emmittl" target="_blank">
-                            return "Linkedin"
+                            <span class="return">return</span><span class="string"> "LinkedIn"</span>
                         </a>
                     </p>
                 </div>
             </details>
+            </div>
+            <div class="function-div">
+            <p class="list-item"><span class="comment"># read more about me</span></p>
             <p class="list-item" hx-target="#home-container" hx-post="/about-me" hx-swap="innerHTML settle:1s">
-                    get_about_me() 
+                    <span class="function-definition">def</span>
+                    <span class="function-name">get_about</span><span class="bracket">():</span>
             </p>
          <!--       <p class="list-item">
                    Blog 
     </p> -->
+                </div>
             </div> 
     """
     return response
