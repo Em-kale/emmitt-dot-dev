@@ -1,10 +1,9 @@
 from core import app
-from flask import render_template, session
+from flask import render_template
 
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    session["project-subitems-opened"] = "closed"
     return render_template("index.html")
 
 
