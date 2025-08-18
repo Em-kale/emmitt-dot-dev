@@ -1,2 +1,2 @@
-# luhning-dot-dev
+# [[emmitt.dev]]
 My Personal Website - built with flask &amp; htmx
