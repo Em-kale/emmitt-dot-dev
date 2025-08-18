@@ -17,11 +17,11 @@ def aboutMeContent():
                 <span class="function-definition">&larr; </span><span class="function-name">back</span><span class="bracket">()</span></span><span class="function-definition"> | </span><span class="function-name">about me</span>
             </h3>
             <div class="grid-container">
-            <div class="education">
+            <div class="grid-cell">
                 <h4>Education</h4>
                 <p class="about-me-content">B.Eng - Software Engineering, Carleton University </p>
             </div>
-            <div class="education">
+            <div class="grid-cell">
             <h4>Skillset</h4>
             <p class="about-me-content">- Javascript (Node, React)</p>
             <p class="about-me-content">- Python, C, Assembly, Java</p>
@@ -31,7 +31,7 @@ def aboutMeContent():
             <p class="about-me-content">- Azure, Terraform</p>
             <p class="about-me-content">- I use vim btw</p>
             </div>
-                <div class="education">
+                <div class="grid-cell">
                     <h4>Current Areas of Interest</h4>
                     <p class="about-me-content">- Computer and Software Architecture</p>
                     <p class="about-me-content">- Operating Systems</p>

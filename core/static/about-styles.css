@@ -37,15 +37,22 @@
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: 33% 30% 30%;
     padding: 30px;
+    display: grid;
     margin: 30px;
     margin-top: 5px;
     padding-top: 5px;
     column-gap: 30px;
     row-gap: 20px;
+    grid-template-columns: 30%, 30%, 30%;
 }
+
+
+.grid-cell {
+    grid-column: span 1;
+}
+
+
 
 h4 {
     color: #bb9af7;
@@ -74,4 +81,15 @@ h4 {
 .crumb:hover {
     color: slategray;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 1000px) {
+    .grid-cell {
+        grid-column: span 3
+    }
+
+    .headshot {
+        height: 35vh;
+        width: 35vh;
+    }
 }
