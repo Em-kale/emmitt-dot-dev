@@ -7,6 +7,11 @@ def home():
     return render_template("index.html")
 
 
+@app.route("/graphs", methods=["GET", "POST"])
+def graphs():
+    return render_template("/graphs/graphs.html")
+
+
 @app.route("/about-me", methods=["POST"])
 def aboutMeContent():
     response = """
@@ -67,7 +72,13 @@ def mainList():
                     <span class="function-name">get_project_links</span><span class="bracket">():</span>
                 </p>
                 <div class="sub-list-1">
-                    <!--<p class="list-item">return "Graph Traversal Visualizer"</p> -->
+                    <p class="list-item">
+                        <a class="link" href="/graphs" target="_blank">
+                            <span class="return">return</span><span class="string">
+                                "Graph Visualizer"
+                            </span>
+                        </a>
+                    </p>
                     <p class="list-item">
                         <a class="link" href="https://github.com/Em-kale/carleton-mail-delivery-robot" target="_blank">
                             <span class="return">return</span><span class="string"> "Autonomous Mail Delivery"</span>
