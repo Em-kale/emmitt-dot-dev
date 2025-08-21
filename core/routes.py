@@ -1,5 +1,6 @@
 from core import app
 from flask import render_template
+from core.graph import graph_controller  # noqa
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -72,6 +73,7 @@ def mainList():
                     <span class="function-name">get_project_links</span><span class="bracket">():</span>
                 </p>
                 <div class="sub-list-1">
+                    <!--<p class="list-item">return "Graph Traversal Visualizer"</p> -->
                     <p class="list-item">
                         <a class="link" href="/graphs" target="_blank">
                             <span class="return">return</span><span class="string">

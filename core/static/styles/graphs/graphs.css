@@ -1,0 +1,8 @@
+body {
+    overflow: hidden;
+    background: black;
+}
+
+.threejs-container {
+    overflow: hidden
+}
