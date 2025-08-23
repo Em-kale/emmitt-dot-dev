@@ -4,10 +4,10 @@ import numpy as np
 class GraphInitializer():
 
     # Graph constants
-    NUMBER_OF_NODES = 10
+    NUMBER_OF_NODES = 20
     # this should increase as NUMBER_OF_NODES increases
 
-    NULL_EDGE_PROBABILITY = np.log(NUMBER_OF_NODES * 40)
+    NULL_EDGE_PROBABILITY = np.log(NUMBER_OF_NODES * 70)
 
     # Force directed algorithm constants
     # For total area of canvas
