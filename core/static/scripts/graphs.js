@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 let center = new THREE.Vector3(0, 0, 0)
 let layout = []
@@ -6,11 +7,16 @@ let graph = []
 
 async function getGraph() {
     try {
+        const requestData = {
+            number_of_nodes: 20
+        }
+
         const response = await fetch('/get-graph', {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
+            body: JSON.stringify(requestData)
         });
 
         if (!response.ok) {
@@ -66,13 +72,6 @@ function generateLines() {
         }
         i++
     }
-    console.log("edges", edges)
-
-    //draw the edges 
-    //try to print just one edge
-    console.log("edge 1", edges[0])
-    console.log("edge 1 point 1", edges[0][0])
-    console.log("edge 1 point 2", edges[0][1])
 
     const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
     const lineGroup = new THREE.Group()
@@ -94,21 +93,24 @@ function generateLines() {
 }
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer();
 
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById('threejs-container').appendChild(renderer.domElement);
+const container = document.getElementById('threejs-container')
+renderer.setSize(container.offsetWidth, container.offsetHeight);
 
+container.appendChild(renderer.domElement)
+const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
 await getGraph()
 generatePoints()
 generateLines()
 
 //set camera based on location of the node object group
-camera.position.set(center.x, center.y, center.x + 60)
+camera.position.set(center.x, center.y, center.x + 70)
+let controls = new OrbitControls(camera, renderer.domElement);
 
 function animate() {
     renderer.render(scene, camera);
+    controls.update();
 }
 
 renderer.setAnimationLoop(animate);
