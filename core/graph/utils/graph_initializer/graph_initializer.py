@@ -2,38 +2,37 @@ import numpy as np
 
 
 class GraphInitializer():
+    def __init__(self,
+                 numberOfNodes=10,
+                 clusteringModifier=1,
+                 height=40,
+                 width=40,
+                 nodeRadius=2,
+                 minEdgeLength=1,
+                 coolingFactorDecay=0.99
+                 ):
 
-    # Graph constants
-    NUMBER_OF_NODES = 20
-    # this should increase as NUMBER_OF_NODES increases
+        self.number_of_nodes = numberOfNodes
+        self.clustering_modifier = clusteringModifier
+        self.height = height
+        self.width = width
+        self.node_radius = nodeRadius
+        self.min_edge_length = minEdgeLength
+        self.cooling_factor_decay = coolingFactorDecay
 
-    NULL_EDGE_PROBABILITY = np.log(NUMBER_OF_NODES * 70)
+        self.area = height*width
+        self.ideal_length = np.sqrt((self.area / self.number_of_nodes))
+        self.null_edge_probability = np.log(self.number_of_nodes * 90)
+        self.force_threshold = self.ideal_length * 0.01
+        self.max_iterations = max(50, int(50 * np.log(self.number_of_nodes)))
+        self.repulsion_constant = self.ideal_length ** 2
+        self.min_distance = self.node_radius * 2.1
+        self.initial_cooling_factor = self.ideal_length*0.1
 
-    # Force directed algorithm constants
-    # For total area of canvas
-    HEIGHT = 40.0
-    WIDTH = 40.0
-    NODE_RADIUS = 2
-    MIN_EDGE_LENGTH = 1
-    CLUSTERING_MODIFIER = 2  # increase this value for more clustering
-    AREA = WIDTH * HEIGHT
-    IDEAL_LENGTH = np.sqrt((AREA / NUMBER_OF_NODES))
-
-    FORCE_THRESHOLD = IDEAL_LENGTH * 0.01
-
-    MAX_ITERATIONS = max(50, int(50 * np.log(NUMBER_OF_NODES)))
-
-    REPULSION_CONSTANT = IDEAL_LENGTH ** 2
-    MIN_DISTANCE = NODE_RADIUS * 2.1
-
-    INITIAL_COOLING_FACTOR = IDEAL_LENGTH*0.1
-    COOLING_FACTOR_DECAY = 0.99
-
-    def __init__(self):
         # our graph
         # must by symmetrical
         adjacencyMatrix = np.random.randint(
-            2, 12, (self.NUMBER_OF_NODES, self.NUMBER_OF_NODES))
+            2, 12, (self.number_of_nodes, self.number_of_nodes))
 
         # create a mask, which is a matrix corresponding to
         # the adjacencyMatrix where every value is true
@@ -42,7 +41,7 @@ class GraphInitializer():
         # we will set those values to zero to ensure that
         # around the edge probability gets set to zero
         edgeMask = np.random.rand(
-            self.NUMBER_OF_NODES, self.NUMBER_OF_NODES) < self.NULL_EDGE_PROBABILITY
+            self.number_of_nodes, self.number_of_nodes) < self.null_edge_probability
 
         # this inverts the array and applies the mask
         # giving a boolean array like this to a numpy array
@@ -64,7 +63,7 @@ class GraphInitializer():
         # make sure there are no orphaned nodes
 
         # initial coordinates for all nodes set to random values
-        self.layout = np.random.uniform(0, 10, (self.NUMBER_OF_NODES, 3))
+        self.layout = np.random.uniform(0, 10, (self.number_of_nodes, 3))
 
     # ------------------- PUBLIC METHODS -------------------------
 
@@ -87,17 +86,17 @@ class GraphInitializer():
     def __calculate_positions(self, positionLayout):
         currentIteration = 0
 
-        maxForce = self.FORCE_THRESHOLD + 1
-        temp_positions = np.zeros((self.NUMBER_OF_NODES, 3))
-        cooling_factor = self.INITIAL_COOLING_FACTOR
+        maxForce = self.force_threshold + 1
+        temp_positions = np.zeros((self.number_of_nodes, 3))
+        cooling_factor = self.initial_cooling_factor
         # using Eade's force directed algorithm for simplicity
-        while currentIteration < self.MAX_ITERATIONS and maxForce > self.FORCE_THRESHOLD:
+        while currentIteration < self.max_iterations and maxForce > self.force_threshold:
 
             # let forces be an array holding an array for each node
-            # AKA 2D array with NUMBER_OF_NODES arrays set to zero originally
+            # AKA 2D array with number_of_nodes arrays set to zero originally
             maxForce = 0.0
 
-            forces = np.zeros((self.NUMBER_OF_NODES, 3))
+            forces = np.zeros((self.number_of_nodes, 3))
             i = 0
 
             # need Frep(u, v) + Fatt(u,v) for each node
@@ -112,7 +111,7 @@ class GraphInitializer():
                 attractive_force = self.__get_attractive_sum(
                     positionLayout[i], i, positionLayout)
 
-                total_force = repulsive_force + attractive_force * self.CLUSTERING_MODIFIER
+                total_force = repulsive_force + attractive_force * self.clustering_modifier
                 # weaken attractive force to reduce clustering
 
                 forces[i] = total_force
@@ -130,7 +129,7 @@ class GraphInitializer():
                 i += 1
 
             positionLayout = temp_positions
-            cooling_factor = cooling_factor * self.COOLING_FACTOR_DECAY
+            cooling_factor = cooling_factor * self.cooling_factor_decay
             currentIteration += 1
 
         return positionLayout
@@ -153,8 +152,8 @@ class GraphInitializer():
 
             euclidian_distance = np.linalg.norm(positionLayout[i]-node)
 
-            if euclidian_distance < self.MIN_DISTANCE:
-                euclidian_distance = self.MIN_DISTANCE
+            if euclidian_distance < self.min_distance:
+                euclidian_distance = self.min_distance
 
             vector_between_nodes = positionLayout[i] - node
 
@@ -171,13 +170,13 @@ class GraphInitializer():
             # and not the strength of the connection
             # otherwise, it would be the inverse
             spring_force = 0
-            if (euclidian_distance <= self.MIN_DISTANCE):
+            if (euclidian_distance <= self.min_distance):
                 spring_force_sum += 0
                 i += 1
                 continue
 
             spring_force = edge*(np.log(euclidian_distance /
-                                        self.IDEAL_LENGTH)*unit_vector)
+                                        self.ideal_length)*unit_vector)
 
             spring_force_sum += spring_force
             i += 1
@@ -197,8 +196,8 @@ class GraphInitializer():
             # enocdes no information about direction
             euclidian_distance = np.linalg.norm(positionLayout[i]-node)
 
-            if euclidian_distance < self.MIN_DISTANCE:
-                euclidian_distance = self.MIN_DISTANCE
+            if euclidian_distance < self.min_distance:
+                euclidian_distance = self.min_distance
 
             # calclate the unit vector between i and node , from i -> node
             vector_between_nodes = node - positionLayout[i]
@@ -207,7 +206,7 @@ class GraphInitializer():
             unit_vector = vector_between_nodes / euclidian_distance
 
             # calculate repulsive force sum
-            sum_of_repulsive_forces += ((self.REPULSION_CONSTANT /
+            sum_of_repulsive_forces += ((self.repulsion_constant /
                                          (euclidian_distance ** 2))
                                         * unit_vector)
             i += 1
