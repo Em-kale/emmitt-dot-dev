@@ -4,6 +4,11 @@
 <head>
   <title>L.dev</title>
   <link rel="stylesheet" type="text/css" href="/static/styles/graphs/graphs.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital@0;1&family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"></script>
   <script type="importmap">
     {
@@ -16,9 +21,9 @@
 </head>
 
 <body>
+  <h1> Graph Visualizer </h1>
   <div class="grid-container">
     <div class="grid-cell">
-      <h1> Graph Visualizer </h1>
       <div class="slider-container">
         <label class="label"> Number of Nodes </label>
         <br />
@@ -34,17 +39,28 @@
       <div class="slider-container">
         <label class="label"> Null Edge Probability </label>
         <br />
-        <span class="label-descriptor">0</span><input class="slider" type="range" id="null-edge-probability" min="0"
-          max="100" steps="1"></input><span class="label-descriptor">100</span>
+        <span class="label-descriptor">0</span><input class="slider" value="80" type="range" id="null-edge-probability"
+          min="0" max="100" steps="1"></input><span class="label-descriptor">100</span>
+      </div>
+      <div class="slider-container">
+        <span class="label-descriptor">2D</span>
+        <label class="switch">
+          <input id="three-d" type="checkbox" checked />
+          <span class="dimension-slider"></span>
+        </label>
+        <span class="label-descriptor">3D</span>
       </div>
       <button id="submit">Generate</button>
     </div>
     <div class="grid-cell" id="threejs-container">
     </div>
+    <div></div>
+    <div class="tip">
+      <p>Click and drag graph to rotate</p>
+    </div>
   </div>
   <script type="module" src="/static/scripts/graphs.js">
   </script>
 </body>
-
 
 </html>
