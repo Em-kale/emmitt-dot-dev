@@ -59,7 +59,7 @@ async function getGraph(numberOfNodes, clusteringModifier, nullEdgeProbability) 
 
 // ---------- Scene generation -----------------
 
-function generatePoints() {
+function generatePoints(threeD) {
     const geometry = new THREE.SphereGeometry(1);
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
@@ -67,8 +67,12 @@ function generatePoints() {
     let i = 0;
     while (i < layout.length) {
         let node = new THREE.Mesh(geometry, material)
-
-        node.position.set(layout[i][0], layout[i][1], 0)
+        if (threeD) {
+            node.position.set(layout[i][0], layout[i][1], layout[i][2])
+        }
+        else {
+            node.position.set(layout[i][0], layout[i][1], 0)
+        }
         nodeGroup.add(node)
 
         i += 1
@@ -79,6 +83,7 @@ function generatePoints() {
 
     center = box.getCenter(new THREE.Vector3());
 }
+
 
 function generateEdges() {
     let edges = []
@@ -101,7 +106,7 @@ function generateEdges() {
     return edges
 }
 
-function addEdgesToScene(edges) {
+function addEdgesToScene(edges, threeD) {
     const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
     const lineGroup = new THREE.Group()
 
@@ -109,10 +114,14 @@ function addEdgesToScene(edges) {
     while (k < edges.length) {
         //convert each edge into a threejs vector, starting with 2D
         let points = []
-
-        points.push(new THREE.Vector2(edges[k][0][0], edges[k][0][1]))
-        points.push(new THREE.Vector2(edges[k][1][0], edges[k][1][1]))
-
+        if (threeD) {
+            points.push(new THREE.Vector3(edges[k][0][0], edges[k][0][1], edges[k][0][2]))
+            points.push(new THREE.Vector3(edges[k][1][0], edges[k][1][1], edges[k][1][2]))
+        }
+        else {
+            points.push(new THREE.Vector2(edges[k][0][0], edges[k][0][1]))
+            points.push(new THREE.Vector2(edges[k][1][0], edges[k][1][1]))
+        }
         const geometry = new THREE.BufferGeometry().setFromPoints(points)
         const edge = new THREE.Line(geometry, lineMaterial)
         lineGroup.add(edge)
@@ -135,12 +144,14 @@ async function initializeScene() {
     let numberOfNodes = document.getElementById("node-number").value
     let clusteringModidifier = document.getElementById("clustering-modifier").value
     let nullEdgeProbability = document.getElementById("null-edge-probability").value
+    let threeD = document.getElementById("three-d").checked
+
     await getGraph(numberOfNodes, clusteringModidifier, nullEdgeProbability)
 
     //Create the elements
-    generatePoints()
+    generatePoints(threeD)
     let edges = generateEdges()
-    addEdgesToScene(edges)
+    addEdgesToScene(edges, threeD)
 
 }
 

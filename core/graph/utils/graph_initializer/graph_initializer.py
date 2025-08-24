@@ -10,7 +10,7 @@ class GraphInitializer():
                  nodeRadius=2,
                  minEdgeLength=1,
                  coolingFactorDecay=0.99,
-                 nullEdgeProbability=False
+                 nullEdgeProbability=300
                  ):
 
         self.number_of_nodes = numberOfNodes
@@ -46,7 +46,7 @@ class GraphInitializer():
         # we will set those values to zero to ensure that
         # around the edge probability gets set to zero
         edgeMask = np.random.rand(
-            self.number_of_nodes, self.number_of_nodes) < self.null_edge_probability
+            self.number_of_nodes, self.number_of_nodes) < (self.null_edge_probability / 100)
 
         # this inverts the array and applies the mask
         # giving a boolean array like this to a numpy array
