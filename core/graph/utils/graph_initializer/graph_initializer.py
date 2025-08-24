@@ -9,7 +9,8 @@ class GraphInitializer():
                  width=40,
                  nodeRadius=2,
                  minEdgeLength=1,
-                 coolingFactorDecay=0.99
+                 coolingFactorDecay=0.99,
+                 nullEdgeProbability=False
                  ):
 
         self.number_of_nodes = numberOfNodes
@@ -19,10 +20,14 @@ class GraphInitializer():
         self.node_radius = nodeRadius
         self.min_edge_length = minEdgeLength
         self.cooling_factor_decay = coolingFactorDecay
+        self.null_edge_probability = nullEdgeProbability
 
         self.area = height*width
         self.ideal_length = np.sqrt((self.area / self.number_of_nodes))
-        self.null_edge_probability = np.log(self.number_of_nodes * 90)
+
+        if (self.null_edge_probability is False):
+            self.null_edge_probability = np.log(self.number_of_nodes * 90)
+
         self.force_threshold = self.ideal_length * 0.01
         self.max_iterations = max(50, int(50 * np.log(self.number_of_nodes)))
         self.repulsion_constant = self.ideal_length ** 2

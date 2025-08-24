@@ -1,14 +1,37 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
+//honestly don't know what these are doing here
 let center = new THREE.Vector3(0, 0, 0)
+let controls
 let layout = []
 let graph = []
 
-async function getGraph() {
+// -------------------- Elements --------------------------
+const submitButton = document.getElementById('submit')
+const container = document.getElementById('threejs-container')
+
+// -------------- Scene Setup ---------------------------
+const scene = new THREE.Scene();
+const renderer = new THREE.WebGLRenderer();
+
+renderer.setSize(container.offsetWidth, container.offsetHeight);
+container.appendChild(renderer.domElement)
+
+const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+camera.position.set(center.x, center.y, center.z + 70)
+controls = new OrbitControls(camera, renderer.domElement);
+
+// ----------------- Event Listeners ----------------------
+submitButton.addEventListener("click", () => { initializeScene() })
+
+async function getGraph(numberOfNodes, clusteringModifier, nullEdgeProbability) {
+    console.log("number of nodes", numberOfNodes)
     try {
         const requestData = {
-            number_of_nodes: 20
+            number_of_nodes: parseInt(numberOfNodes),
+            clustering_modifier: parseInt(clusteringModifier),
+            null_edge_probability: parseInt(nullEdgeProbability)
         }
 
         const response = await fetch('/get-graph', {
@@ -33,6 +56,9 @@ async function getGraph() {
     }
 }
 
+
+// ---------- Scene generation -----------------
+
 function generatePoints() {
     const geometry = new THREE.SphereGeometry(1);
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
@@ -54,7 +80,7 @@ function generatePoints() {
     center = box.getCenter(new THREE.Vector3());
 }
 
-function generateLines() {
+function generateEdges() {
     let edges = []
     let i = 0;
     // calculate the points 
@@ -72,7 +98,10 @@ function generateLines() {
         }
         i++
     }
+    return edges
+}
 
+function addEdgesToScene(edges) {
     const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
     const lineGroup = new THREE.Group()
 
@@ -89,28 +118,37 @@ function generateLines() {
         lineGroup.add(edge)
         k += 1
     }
+
     scene.add(lineGroup)
 }
 
-const scene = new THREE.Scene();
-const renderer = new THREE.WebGLRenderer();
+async function initializeScene() {
+    //Clean up any previous initializated geometries and materials 
+    scene.children.forEach(child => {
+        if (child.geometry) child.geometry.dispose();
+        if (child.material) child.material.dispose();
+    });
 
-const container = document.getElementById('threejs-container')
-renderer.setSize(container.offsetWidth, container.offsetHeight);
+    //clear everything from scene
+    scene.clear()
 
-container.appendChild(renderer.domElement)
-const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
-await getGraph()
-generatePoints()
-generateLines()
+    let numberOfNodes = document.getElementById("node-number").value
+    let clusteringModidifier = document.getElementById("clustering-modifier").value
+    let nullEdgeProbability = document.getElementById("null-edge-probability").value
+    await getGraph(numberOfNodes, clusteringModidifier, nullEdgeProbability)
 
-//set camera based on location of the node object group
-camera.position.set(center.x, center.y, center.x + 70)
-let controls = new OrbitControls(camera, renderer.domElement);
+    //Create the elements
+    generatePoints()
+    let edges = generateEdges()
+    addEdgesToScene(edges)
+
+}
+
 
 function animate() {
     renderer.render(scene, camera);
     controls.update();
 }
 
+initializeScene()
 renderer.setAnimationLoop(animate);

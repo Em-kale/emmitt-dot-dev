@@ -19,12 +19,25 @@
   <div class="grid-container">
     <div class="grid-cell">
       <h1> Graph Visualizer </h1>
-      <label class="label"> Number of Nodes </label>
       <div class="slider-container">
-        <span class="label-descriptor">0</span><input class="slider" type="range" id="node-number" min="1" max="100"
-          steps="5"></input><span class="label-descriptor">100</span>
+        <label class="label"> Number of Nodes </label>
+        <br />
+        <span class="label-descriptor">1</span><input class="slider" type="range" id="node-number" min="1" max="30"
+          steps="1"></input><span class="label-descriptor">30</span>
       </div>
-      <button>Generate</button>
+      <div class="slider-container">
+        <label class="label"> Clustering Modifier </label>
+        <br />
+        <span class="label-descriptor">0</span><input class="slider" type="range" id="clustering-modifier" min="0"
+          max="2" steps="0.1"></input><span class="label-descriptor">2</span>
+      </div>
+      <div class="slider-container">
+        <label class="label"> Null Edge Probability </label>
+        <br />
+        <span class="label-descriptor">0</span><input class="slider" type="range" id="null-edge-probability" min="0"
+          max="100" steps="1"></input><span class="label-descriptor">100</span>
+      </div>
+      <button id="submit">Generate</button>
     </div>
     <div class="grid-cell" id="threejs-container">
     </div>
