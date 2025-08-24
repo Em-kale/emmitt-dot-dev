@@ -13,6 +13,10 @@ label {
     color: white;
 }
 
+.slider-container {
+    margin-top: 30px
+}
+
 .label-descriptor {
     color: white;
 }

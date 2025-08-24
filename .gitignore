@@ -1,2 +1,4 @@
 .env
 core/__pycache__
+core/graph/__pycache__
+core/graph/utils/graph_initializer/__pycache__
