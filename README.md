@@ -1,2 +1,2 @@
 # [emmitt.dev](https://emmitt.dev)
-My Personal Website - built with flask &amp; htmx
+My Personal Website - built with htmx
